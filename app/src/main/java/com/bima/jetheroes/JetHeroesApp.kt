@@ -1,5 +1,10 @@
 package com.bima.jetheroes
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
@@ -31,6 +36,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import com.bima.jetheroes.model.HeroesData
 import com.bima.jetheroes.ui.theme.JetHeroesTheme
+import kotlinx.coroutines.launch
 
 @Composable
 fun JetHeroesApp(
@@ -52,6 +58,22 @@ fun JetHeroesApp(
                     modifier = Modifier.fillMaxWidth()
                 )
             }
+        }
+        AnimatedVisibility(
+            visible = showButton,
+            enter = fadeIn() + slideInVertically(),
+            exit = fadeOut() + slideOutVertically(),
+            modifier = Modifier
+                .padding(bottom = 30.dp)
+                .align(Alignment.BottomCenter)
+        ) {
+            ScrollToTopButton(
+                onClick = {
+                    scope.launch {
+                        listState.scrollToItem(index = 0)
+                    }
+                }
+            )
         }
     }
 }

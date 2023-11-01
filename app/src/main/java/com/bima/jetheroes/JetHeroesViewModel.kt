@@ -19,6 +19,7 @@ class JetHeroesViewModel(private val repository: HeroRepository) : ViewModel() {
 
     private val _query = mutableStateOf("")
     val query: State<String> get() = _query
+
     fun search(newQuery: String) {
         _query.value = newQuery
         _groupedHeroes.value = repository.searchHeroes(_query.value)

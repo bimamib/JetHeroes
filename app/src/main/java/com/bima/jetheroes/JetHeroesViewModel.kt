@@ -1,5 +1,7 @@
 package com.bima.jetheroes
 
+import androidx.compose.runtime.State
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.bima.jetheroes.data.HeroRepository
@@ -14,6 +16,15 @@ class JetHeroesViewModel(private val repository: HeroRepository) : ViewModel() {
             .groupBy { it.name[0] }
     )
     val groupedHeroes: StateFlow<Map<Char, List<Hero>>> get() = _groupedHeroes
+
+    private val _query = mutableStateOf("")
+    val query: State<String> get() = _query
+    fun search(newQuery: String) {
+        _query.value = newQuery
+        _groupedHeroes.value = repository.searchHeroes(_query.value)
+            .sortedBy { it.name }
+            .groupBy { it.name[0] }
+    }
 }
 
 class ViewModelFactory(private val repository: HeroRepository) :

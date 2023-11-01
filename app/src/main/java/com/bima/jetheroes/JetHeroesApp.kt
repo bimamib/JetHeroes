@@ -49,6 +49,7 @@ fun JetHeroesApp(
         val showButton: Boolean by remember {
             derivedStateOf { listState.firstVisibleItemIndex > 0 }
         }
+
         LazyColumn(
             state = listState,
             contentPadding = PaddingValues(bottom = 80.dp)
@@ -61,6 +62,7 @@ fun JetHeroesApp(
                 )
             }
         }
+
         AnimatedVisibility(
             visible = showButton,
             enter = fadeIn() + slideInVertically(),

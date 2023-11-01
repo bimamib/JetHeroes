@@ -47,6 +47,10 @@ import kotlinx.coroutines.launch
 fun JetHeroesApp(
     modifier: Modifier = Modifier,
 ) {
+    val groupedHeroes = HeroesData.heroes
+        .sortedBy { it.name }
+        .groupBy { it.name[0] }
+
     Box(modifier = modifier) {
         val scope = rememberCoroutineScope()
         val listState = rememberLazyListState()
@@ -138,7 +142,7 @@ fun CharacterHeader(
     modifier: Modifier = Modifier
 ) {
     Surface(
-        color = MaterialTheme.colors.primary,
+        color = MaterialTheme.colorScheme.primary,
         modifier = modifier
     ) {
         Text(

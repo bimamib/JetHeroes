@@ -7,6 +7,7 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -50,6 +51,7 @@ fun JetHeroesApp(
         }
         LazyColumn(
             state = listState,
+            contentPadding = PaddingValues(bottom = 80.dp)
         ) {
             items(HeroesData.heroes, key = { it.id }) { hero ->
                 HeroListItem(

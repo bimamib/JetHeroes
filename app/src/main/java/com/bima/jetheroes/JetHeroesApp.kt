@@ -2,6 +2,7 @@ package com.bima.jetheroes
 
 import androidx.compose.animation.*
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -36,6 +37,7 @@ fun JetHeroesApp(
     viewModel: JetHeroesViewModel = viewModel(factory = ViewModelFactory(HeroRepository()))
 ) {
     val groupedHeroes by viewModel.groupedHeroes.collectAsState()
+    val query by viewModel.query
 
     Box(modifier = modifier) {
         val scope = rememberCoroutineScope()
@@ -48,6 +50,13 @@ fun JetHeroesApp(
             state = listState,
             contentPadding = PaddingValues(bottom = 80.dp)
         ) {
+            item {
+                SearchBar(
+                    query = query,
+                    onQueryChange = viewModel::search,
+                    modifier = Modifier.background(MaterialTheme.colorScheme.primary)
+                )
+            }
             groupedHeroes.forEach { (initial, heroes) ->
                 stickyHeader {
                     CharacterHeader(initial)

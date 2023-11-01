@@ -63,6 +63,9 @@ dependencies {
     /*Library Coil*/
     implementation ("io.coil-kt:coil-compose:2.2.0")
 
+    /*ViewModel dari Composable*/
+    implementation ("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
